@@ -1,0 +1,33 @@
+<p>iowindow works!</p>
+<div>
+	<!--
+		Minimum features left to implement:
+		halfway decent presentation
+
+		Adv feature - retreive prior comm history with a session
+	-->
+	Sessions:
+	<select #sessionSelect (change)="selectSession(sessionSelect.value)">
+		<option *ngFor="let session of sessions; let i = index" [value]="i">
+			{{sessions[i].sessionId}} : {{sessions[i].hostname}} : {{sessions[i].username}} : {{sessions[i].protocol}}
+		</option>
+	</select>
+	<input type="button" value="Refresh Session Options" (click)="renderSessionOptions()">
+	<br>
+	<form #iowindowForm="ngForm">
+	<input name="newCommand" [(ngModel)]="newCommand" (keydown.enter)="transmitCmd(newCommand)">
+	<input type="button" value="Send command" (click)="transmitCmd(newCommand)" >
+	</form>
+	<br>
+	Uplink File to Target Daemon:
+	<input #filenameTxt>
+	<input type="file" (change)="handleUpload($event, filenameTxt.value)">
+	<hr>
+	<div class="angular-with-newlines" *ngFor="let io of responses.reverse()">
+		<div *ngIf="!io.isCommand"><b>Received:</b></div>
+		<div *ngIf="io.isCommand"><b>Send Command:</b></div>
+		{{io.response}} <br>
+	</div>
+
+
+</div>
