@@ -1,0 +1,4 @@
+{
+	"command_rest_url" : "http://localhost:8002/cmdrest",
+	"session_list_rest_url": "http://localhost:8002/getsessions"
+}
